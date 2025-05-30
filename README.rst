@@ -5,7 +5,7 @@ Simple policy to detect TOR connections
 Following functionality are provided by the script
 --------------------------------------------------
 :: Directionality - Not all TOR is bad !
-often we've found that outgoing TOR is acceptable while incoming TOR is questionable activity.This package also is configurable to only flag incoming TOR probes, if desired.
+        Often we've found that outgoing TOR is acceptable while incoming TOR is questionable activity.This package also is configurable to only flag incoming TOR probes, if desired.
 
 Installation
 ------------
