@@ -1,0 +1,27 @@
+#!/usr/local/bin/bash
+
+# Configuration
+URL="https://www.dan.me.uk/torlist/?full"
+URL="https://www.dan.me.uk/torlist/?exit"
+FILE="TOR.24hrs"
+
+# Create temp files
+tmpfile=$(mktemp)
+raw_file=$(mktemp)
+
+# Cleanup on exit
+trap 'rm -f "$tmpfile" "$raw_file"' EXIT
+
+# Download data
+if ! curl -s -f -o "$raw_file" "$URL"; then
+    exit 1
+fi
+
+# Process file (add header)
+echo "torip" > "$tmpfile"
+cat "$raw_file" >> "$tmpfile"
+
+# Compare and update if different
+if ! diff -q "$tmpfile" "$FILE" >/dev/null 2>&1; then
+    mv "$tmpfile" "$FILE"
+fi
